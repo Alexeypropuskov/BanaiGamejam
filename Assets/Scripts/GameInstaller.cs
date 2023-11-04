@@ -1,27 +1,31 @@
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.InputSystem;
 using Zenject;
 
 public class GameInstaller : MonoInstaller
 {
+    private BlockRegistry _registry;
+    
     public Controls Controls;
-
-    public Button PauseButton; 
     public GameObject PausePanel;
     
     public override void InstallBindings()
     {
-        PauseButton.onClick.AddListener(OnPause);
+        _registry = FindObjectOfType<BlockRegistry>();
+        Controls.Mouse.Pause.performed += OnPause;
         PausePanel.SetActive(false);
         
         Controls = new Controls();
         Controls.Enable();
         Container.BindInstance(Controls).AsSingle();
+        TimeManager.IsGame = true;
     }
 
-    public void OnPause()
+    private void OnPause(InputAction.CallbackContext obj)
     {
         TimeManager.IsGame = false;
         PausePanel.SetActive(true);
+        foreach (var block in _registry.AllBlocks)
+            block.SetFroze(true);
     }
 }

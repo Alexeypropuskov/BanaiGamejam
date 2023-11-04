@@ -18,12 +18,16 @@ using Zenject;
 
 		[Space(20f)]
 		public float Distance = 10f;
-		public float MinForce = 0f;
-		public float MaxForce = 10f;
-		public float Force = 5f;
+		public int MinForce = 0;
+		public int MaxForce = 10;
+		public int Force = 5;
 		public bool IsOn;
 		public bool CanWork;
 
+		[Space]
+		public float MultDeltaScroll = 100f;
+		
+		[Space]
 		public float MoveSpeed = 3f;
 		
 		private void FixedUpdate()
@@ -62,11 +66,11 @@ using Zenject;
 		}
 
 		private void DeltaPowerOnperformed(InputAction.CallbackContext obj)
-			=> OnPowerChanged(obj.ReadValue<float>());
+			=> PowerSlider.value += obj.ReadValue<Vector2>().y / MultDeltaScroll;
 
 		public void OnPowerChanged(float value)
 		{
-			Force = Mathf.Clamp(value, MinForce, MaxForce);
+			Force = Mathf.Clamp(Mathf.RoundToInt(value), MinForce, MaxForce);
 			PowerValueText.text = Force.ToString();
 		}
 		
