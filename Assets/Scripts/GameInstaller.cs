@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -8,6 +7,7 @@ using UnityEngine.UI;
 
 public class GameInstaller : MonoBehaviour
 {
+    private bool _finish;
     private BlockRegistry _registry;
     
     public Controls Controls;
@@ -61,6 +61,8 @@ public class GameInstaller : MonoBehaviour
     
     public void GameOver(ForcePoint point)
     {
+        if (_finish) return;
+        _finish = true;
         if (_registry.Falls >= MinBlockFallForWin)
         {
             _winPanel.SetActive(true);

@@ -273,6 +273,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Cursor: {fileID: 5308784958054711236}
   ImageCursor: {fileID: 0}
+  Enabled: 0
 --- !u!1 &693758849021298020
 GameObject:
   m_ObjectHideFlags: 0
@@ -1313,8 +1314,8 @@ RectTransform:
   - {fileID: 1689636593191960973}
   - {fileID: 1029558126704296323}
   - {fileID: 7441635700623274381}
-  - {fileID: 7235756891741401857}
   - {fileID: 8549347129397832899}
+  - {fileID: 7235756891741401857}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

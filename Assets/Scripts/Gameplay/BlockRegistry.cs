@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -9,14 +10,24 @@ using UnityEngine;
 		public List<Block> AllBlocks = new(1024);
 		public List<Block> FallBlocks = new(1024);
 
+		[HideInInspector]
 		public int Falls;
+		[Range(0.5f, 10f)]
+		public float DelayForClearVelocity = 1f;
 		
-		private void Awake()
+		private IEnumerator Start()
 		{
 			Installer = FindObjectOfType<GameInstaller>();
 			var blocks = FindObjectsOfType<Block>();
 			foreach (var block in blocks)
 				AllBlocks.Add(block);
+
+			yield return new WaitForSeconds(DelayForClearVelocity);
+			foreach (var block in AllBlocks)
+			{
+				block.Body.velocity = Vector3.zero;
+				block.Body.angularVelocity = Vector3.zero;
+			}
 		}
 
 		private void OnTriggerEnter(Collider other)
