@@ -1,14 +1,11 @@
-﻿using System;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using Zenject;
 
 
 	public class ForcePoint : MonoBehaviour
 	{
-		[Inject]
 		public Controls Controls;
 
 		public Slider PowerSlider;
@@ -70,13 +67,14 @@ using Zenject;
 		{
 			CurrentPower -= Force * PowerCostPerUnitInSec * TimeManager.FixedDeltaTime;
 			FillPower.fillAmount = CurrentPower / PowerLimit;
-			FillValueText.text = CurrentPower.ToString();
+			FillValueText.text = Mathf.RoundToInt(CurrentPower).ToString();
 			//todo учитывать дистанцию? как игромеханически это будет?
 			hit.rigidbody.AddForceAtPosition(Vector3.right * Force, hit.point, ForceMode.Force);
 		}
 
-		private void Awake()
+		private void Start()
 		{
+			Controls = FindObjectOfType<GameInstaller>().Controls;
 			Controls.Mouse.Hold.performed += HoldOnperformed;
 			Controls.Mouse.Hold.canceled += HoldOncanceled;
 			Controls.Mouse.DeltaPower.performed += DeltaPowerOnperformed;

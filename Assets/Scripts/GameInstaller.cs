@@ -1,11 +1,11 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using Zenject;
 
-public class GameInstaller : MonoInstaller
+public class GameInstaller : MonoBehaviour
 {
     private BlockRegistry _registry;
     
@@ -25,8 +25,8 @@ public class GameInstaller : MonoInstaller
     
     [Space]
     public int MinBlockFallForWin = 3;
-    
-    public override void InstallBindings()
+
+    private void Awake()
     {
         Controls = new Controls();
         Controls.Enable();
@@ -34,8 +34,7 @@ public class GameInstaller : MonoInstaller
         _registry = FindObjectOfType<BlockRegistry>();
         Controls.Mouse.Pause.performed += OnPause;
         PausePanel.SetActive(false);
-        
-        Container.BindInstance(Controls).AsSingle();
+
         TimeManager.IsGame = true;
         
         _winPanel.SetActive(false);
@@ -43,12 +42,22 @@ public class GameInstaller : MonoInstaller
         _nextGameButton.onClick.AddListener(LoadNextLevel);
         _restartGameButton.onClick.AddListener(Restart);
 
-        FallBlocks.text = $"{_registry.FallBlocks.Count.ToString()}/{MinBlockFallForWin}";
+        FallBlocks.text = $"{_registry.Falls.ToString()}/{MinBlockFallForWin}";
     }
 
+    public void UpdateScore()
+    {
+        FallBlocks.text = $"{_registry.Falls.ToString()}/{MinBlockFallForWin}";
+        if (_registry.Falls >= MinBlockFallForWin)
+        {
+            _winPanel.SetActive(true);
+            TimeManager.IsGame = false;
+        }
+    }
+    
     public void GameOver(ForcePoint point)
     {
-        if (_registry.FallBlocks.Count >= MinBlockFallForWin)
+        if (_registry.Falls >= MinBlockFallForWin)
         {
             _winPanel.SetActive(true);
             TimeManager.IsGame = false;

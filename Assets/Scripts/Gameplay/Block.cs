@@ -9,6 +9,8 @@ using UnityEngine;
 		
 		[HideInInspector]
 		public Rigidbody Body;
+
+		public bool Calc = true;
 		
 		
 
