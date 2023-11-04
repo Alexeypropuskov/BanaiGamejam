@@ -34,7 +34,7 @@ namespace Gameplay
 		private void Movement()
 		{
 			var move = Controls.Mouse.Movement.ReadValue<Vector2>();
-			move *= Time.fixedDeltaTime;
+			move *= MoveSpeed * Time.fixedDeltaTime;
 			transform.position += new Vector3(move.x, move.y);
 		}
 
