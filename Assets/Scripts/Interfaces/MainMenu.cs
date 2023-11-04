@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-	private const string c_progressKey = "Progress";
+	public const string c_progressKey = "Progress";
 	private const int c_shift = 1;//0 - MainMenu
 	private int _tutIndex = 0;
 	private GameObject[] _tutorialPanels;
