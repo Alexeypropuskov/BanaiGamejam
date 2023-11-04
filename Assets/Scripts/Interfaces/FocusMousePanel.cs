@@ -12,6 +12,8 @@ public class FocusMousePanel : MonoBehaviour, IPointerMoveHandler, IPointerExitH
 		[HideInInspector]
 		public Image ImageCursor;
 
+		public bool Enabled;
+		
 		public void OnPointerMove(PointerEventData eventData)
 		{
 			var pos = new Vector3(eventData.position.x, eventData.position.y, 0f);
@@ -31,10 +33,12 @@ public class FocusMousePanel : MonoBehaviour, IPointerMoveHandler, IPointerExitH
 		public void OnPointerExit(PointerEventData eventData)
 		{
 			Cursor.gameObject.SetActive(false);
+			Enabled = false;
 		}
 
 		public void OnPointerEnter(PointerEventData eventData)
 		{
 			Cursor.gameObject.SetActive(true);
+			Enabled = true;
 		}
 	}

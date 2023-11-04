@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -18,6 +19,7 @@ public class GameInstaller : MonoBehaviour
     
     [Space]
     public GameObject _losePanel;
+    public GameObject _loseBacked;
     public Button _restartGameButton;
 
     [Space]
@@ -25,6 +27,7 @@ public class GameInstaller : MonoBehaviour
     
     [Space]
     public int MinBlockFallForWin = 3;
+    public float LoseDelay = 5f;
 
     private void Awake()
     {
@@ -39,6 +42,7 @@ public class GameInstaller : MonoBehaviour
         
         _winPanel.SetActive(false);
         _losePanel.SetActive(false);
+        _loseBacked.SetActive(false);
         _nextGameButton.onClick.AddListener(LoadNextLevel);
         _restartGameButton.onClick.AddListener(Restart);
 
@@ -65,12 +69,20 @@ public class GameInstaller : MonoBehaviour
         }
         if (point.CurrentPower <= 0)
         {
-            _losePanel.SetActive(true);
-            TimeManager.IsGame = false;
-            return;
+            StartCoroutine(LoseDelayGame());
         }
     }
 
+    private IEnumerator LoseDelayGame()
+    {
+        _losePanel.SetActive(true);
+        Controls.Disable();
+        
+        yield return new WaitForSeconds(LoseDelay);
+        _loseBacked.SetActive(true);
+        TimeManager.IsGame = false;
+    }
+    
     private void LoadNextLevel()
     {
         var count = SceneManager.sceneCount;

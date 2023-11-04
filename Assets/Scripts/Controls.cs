@@ -37,15 +37,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Movement"",
-                    ""type"": ""Value"",
-                    ""id"": ""983b2401-3423-4224-91ff-4e8ec0e7d609"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
                     ""name"": ""DeltaPower"",
                     ""type"": ""Value"",
                     ""id"": ""1832a843-3487-4bc0-af2b-ad708b835466"",
@@ -77,61 +68,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""WASD"",
-                    ""id"": ""646c1e50-fdd4-4265-a8b6-8c7933f37cd9"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""e9f3ac53-8d33-45b0-9278-e863be5474fc"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""21797a52-74e8-495b-aca0-e5c07241e1f7"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""9becc58d-598d-48c7-b9fb-f8117b8cbc0c"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""7b8ebf99-87b4-4d81-b9bb-7235a067f129"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
                     ""name"": """",
                     ""id"": ""9aa4b8db-45de-4dc5-88f8-78689a10b223"",
                     ""path"": ""<Mouse>/scroll"",
@@ -161,7 +97,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         // Mouse
         m_Mouse = asset.FindActionMap("Mouse", throwIfNotFound: true);
         m_Mouse_Hold = m_Mouse.FindAction("Hold", throwIfNotFound: true);
-        m_Mouse_Movement = m_Mouse.FindAction("Movement", throwIfNotFound: true);
         m_Mouse_DeltaPower = m_Mouse.FindAction("DeltaPower", throwIfNotFound: true);
         m_Mouse_Pause = m_Mouse.FindAction("Pause", throwIfNotFound: true);
     }
@@ -226,7 +161,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Mouse;
     private List<IMouseActions> m_MouseActionsCallbackInterfaces = new List<IMouseActions>();
     private readonly InputAction m_Mouse_Hold;
-    private readonly InputAction m_Mouse_Movement;
     private readonly InputAction m_Mouse_DeltaPower;
     private readonly InputAction m_Mouse_Pause;
     public struct MouseActions
@@ -234,7 +168,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         private @Controls m_Wrapper;
         public MouseActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Hold => m_Wrapper.m_Mouse_Hold;
-        public InputAction @Movement => m_Wrapper.m_Mouse_Movement;
         public InputAction @DeltaPower => m_Wrapper.m_Mouse_DeltaPower;
         public InputAction @Pause => m_Wrapper.m_Mouse_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Mouse; }
@@ -249,9 +182,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Hold.started += instance.OnHold;
             @Hold.performed += instance.OnHold;
             @Hold.canceled += instance.OnHold;
-            @Movement.started += instance.OnMovement;
-            @Movement.performed += instance.OnMovement;
-            @Movement.canceled += instance.OnMovement;
             @DeltaPower.started += instance.OnDeltaPower;
             @DeltaPower.performed += instance.OnDeltaPower;
             @DeltaPower.canceled += instance.OnDeltaPower;
@@ -265,9 +195,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Hold.started -= instance.OnHold;
             @Hold.performed -= instance.OnHold;
             @Hold.canceled -= instance.OnHold;
-            @Movement.started -= instance.OnMovement;
-            @Movement.performed -= instance.OnMovement;
-            @Movement.canceled -= instance.OnMovement;
             @DeltaPower.started -= instance.OnDeltaPower;
             @DeltaPower.performed -= instance.OnDeltaPower;
             @DeltaPower.canceled -= instance.OnDeltaPower;
@@ -294,7 +221,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     public interface IMouseActions
     {
         void OnHold(InputAction.CallbackContext context);
-        void OnMovement(InputAction.CallbackContext context);
         void OnDeltaPower(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
     }
