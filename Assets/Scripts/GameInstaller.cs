@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.InputSystem;
 using Zenject;
 
 public class GameInstaller : MonoInstaller
@@ -7,14 +7,12 @@ public class GameInstaller : MonoInstaller
     private BlockRegistry _registry;
     
     public Controls Controls;
-
-    public Button PauseButton; 
     public GameObject PausePanel;
     
     public override void InstallBindings()
     {
         _registry = FindObjectOfType<BlockRegistry>();
-        PauseButton.onClick.AddListener(OnPause);
+        Controls.Mouse.Pause.performed += OnPause;
         PausePanel.SetActive(false);
         
         Controls = new Controls();
@@ -23,7 +21,7 @@ public class GameInstaller : MonoInstaller
         TimeManager.IsGame = true;
     }
 
-    public void OnPause()
+    private void OnPause(InputAction.CallbackContext obj)
     {
         TimeManager.IsGame = false;
         PausePanel.SetActive(true);

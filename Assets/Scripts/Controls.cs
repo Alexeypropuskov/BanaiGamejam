@@ -53,6 +53,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""31eb5a08-7aa0-4b70-b2f3-a2b94ae647f9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -132,6 +141,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""DeltaPower"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1c29498e-a775-474d-ba27-db63d25c9f7f"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -143,6 +163,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Mouse_Hold = m_Mouse.FindAction("Hold", throwIfNotFound: true);
         m_Mouse_Movement = m_Mouse.FindAction("Movement", throwIfNotFound: true);
         m_Mouse_DeltaPower = m_Mouse.FindAction("DeltaPower", throwIfNotFound: true);
+        m_Mouse_Pause = m_Mouse.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -207,6 +228,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Mouse_Hold;
     private readonly InputAction m_Mouse_Movement;
     private readonly InputAction m_Mouse_DeltaPower;
+    private readonly InputAction m_Mouse_Pause;
     public struct MouseActions
     {
         private @Controls m_Wrapper;
@@ -214,6 +236,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @Hold => m_Wrapper.m_Mouse_Hold;
         public InputAction @Movement => m_Wrapper.m_Mouse_Movement;
         public InputAction @DeltaPower => m_Wrapper.m_Mouse_DeltaPower;
+        public InputAction @Pause => m_Wrapper.m_Mouse_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Mouse; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -232,6 +255,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @DeltaPower.started += instance.OnDeltaPower;
             @DeltaPower.performed += instance.OnDeltaPower;
             @DeltaPower.canceled += instance.OnDeltaPower;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
         }
 
         private void UnregisterCallbacks(IMouseActions instance)
@@ -245,6 +271,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @DeltaPower.started -= instance.OnDeltaPower;
             @DeltaPower.performed -= instance.OnDeltaPower;
             @DeltaPower.canceled -= instance.OnDeltaPower;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
         }
 
         public void RemoveCallbacks(IMouseActions instance)
@@ -267,5 +296,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnHold(InputAction.CallbackContext context);
         void OnMovement(InputAction.CallbackContext context);
         void OnDeltaPower(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }
