@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
+	private BlockRegistry _registry;
+	
 	public Slider Volume;
 	public Button RestartButton;
 	public Button ResumeButton;
@@ -12,6 +14,8 @@ public class PauseMenu : MonoBehaviour
 
 	private void Awake()
 	{
+		_registry = FindObjectOfType<BlockRegistry>();
+		
 		Volume.onValueChanged.AddListener(OnVolumeChanged);
 		RestartButton.onClick.AddListener(OnRestart);
 		ResumeButton.onClick.AddListener(OnResume);
@@ -32,6 +36,8 @@ public class PauseMenu : MonoBehaviour
 	{
 		TimeManager.IsGame = true;
 		gameObject.SetActive(false);
+		foreach (var block in _registry.AllBlocks)
+			block.SetFroze(false);
 	}
 
 	public void OnExit()
