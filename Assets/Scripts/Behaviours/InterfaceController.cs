@@ -98,14 +98,14 @@ namespace Netologia.TowerDefence.Behaviors
 			_openPauseButton.interactable = true;
 		}
 		
-		private void OnSoundChanged(float value)
-			=> _audio.Volume = value;
+		//private void OnSoundChanged(float value)
+		//	=> _audio.Volume = value;
 
 		private void Awake()
 		{
 			_resumeButton.onClick.AddListener(CloseMenuPause);
 			_mainMenuButton.onClick.AddListener(LoadMainMenu);
-			_audioScroll.onValueChanged.AddListener(OnSoundChanged);
+		//	_audioScroll.onValueChanged.AddListener(OnSoundChanged);
 			_openPauseButton.onClick.AddListener(OpenMenuPause);
 			_endGameButton.onClick.AddListener(LoadMainMenu);
 
@@ -118,7 +118,7 @@ namespace Netologia.TowerDefence.Behaviors
 		{
 			_resumeButton.onClick.RemoveListener(CloseMenuPause);
 			_mainMenuButton.onClick.RemoveListener(LoadMainMenu);
-			_audioScroll.onValueChanged.RemoveListener(OnSoundChanged);
+		//	_audioScroll.onValueChanged.RemoveListener(OnSoundChanged);
 			_openPauseButton.onClick.RemoveListener(OpenMenuPause);
 			_endGameButton.onClick.RemoveListener(LoadMainMenu);
 		}
