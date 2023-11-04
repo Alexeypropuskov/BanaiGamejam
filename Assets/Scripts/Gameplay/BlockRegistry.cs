@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Gameplay
-{
+
 	public class BlockRegistry : MonoBehaviour
 	{
 		public List<Rigidbody> AllBlocks = new(1024);
@@ -28,4 +27,3 @@ namespace Gameplay
 			FallBlocks.Add(body);
 		}
 	}
-}

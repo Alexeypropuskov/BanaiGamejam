@@ -44,6 +44,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""DeltaPower"",
+                    ""type"": ""Value"",
+                    ""id"": ""1832a843-3487-4bc0-af2b-ad708b835466"",
+                    ""expectedControlType"": ""Delta"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -112,6 +121,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9aa4b8db-45de-4dc5-88f8-78689a10b223"",
+                    ""path"": ""<Mouse>/scroll"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DeltaPower"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -122,6 +142,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Mouse = asset.FindActionMap("Mouse", throwIfNotFound: true);
         m_Mouse_Hold = m_Mouse.FindAction("Hold", throwIfNotFound: true);
         m_Mouse_Movement = m_Mouse.FindAction("Movement", throwIfNotFound: true);
+        m_Mouse_DeltaPower = m_Mouse.FindAction("DeltaPower", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -185,12 +206,14 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private List<IMouseActions> m_MouseActionsCallbackInterfaces = new List<IMouseActions>();
     private readonly InputAction m_Mouse_Hold;
     private readonly InputAction m_Mouse_Movement;
+    private readonly InputAction m_Mouse_DeltaPower;
     public struct MouseActions
     {
         private @Controls m_Wrapper;
         public MouseActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Hold => m_Wrapper.m_Mouse_Hold;
         public InputAction @Movement => m_Wrapper.m_Mouse_Movement;
+        public InputAction @DeltaPower => m_Wrapper.m_Mouse_DeltaPower;
         public InputActionMap Get() { return m_Wrapper.m_Mouse; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -206,6 +229,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Movement.started += instance.OnMovement;
             @Movement.performed += instance.OnMovement;
             @Movement.canceled += instance.OnMovement;
+            @DeltaPower.started += instance.OnDeltaPower;
+            @DeltaPower.performed += instance.OnDeltaPower;
+            @DeltaPower.canceled += instance.OnDeltaPower;
         }
 
         private void UnregisterCallbacks(IMouseActions instance)
@@ -216,6 +242,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Movement.started -= instance.OnMovement;
             @Movement.performed -= instance.OnMovement;
             @Movement.canceled -= instance.OnMovement;
+            @DeltaPower.started -= instance.OnDeltaPower;
+            @DeltaPower.performed -= instance.OnDeltaPower;
+            @DeltaPower.canceled -= instance.OnDeltaPower;
         }
 
         public void RemoveCallbacks(IMouseActions instance)
@@ -237,5 +266,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     {
         void OnHold(InputAction.CallbackContext context);
         void OnMovement(InputAction.CallbackContext context);
+        void OnDeltaPower(InputAction.CallbackContext context);
     }
 }
