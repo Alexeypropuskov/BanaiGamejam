@@ -22,6 +22,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "DeltaPower",
+                    "type": "Value",
+                    "id": "1832a843-3487-4bc0-af2b-ad708b835466",
+                    "expectedControlType": "Delta",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -90,6 +99,17 @@
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "9aa4b8db-45de-4dc5-88f8-78689a10b223",
+                    "path": "<Mouse>/scroll",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DeltaPower",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
