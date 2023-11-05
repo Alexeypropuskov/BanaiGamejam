@@ -576,7 +576,7 @@ MonoBehaviour:
   ExitButton: {fileID: 633103095}
   TutorialButton: {fileID: 805120670}
   VolumeSlider: {fileID: 1317157731}
-  MainMenuSound: {fileID: 8300000, guid: 4c2ac7394b9ab2947883fa059f430611, type: 3}
+  MainMenuSound: {fileID: 8300000, guid: 0f0e493a60e16f440acd4e808b27b157, type: 3}
 --- !u!1 &82972661
 GameObject:
   m_ObjectHideFlags: 0

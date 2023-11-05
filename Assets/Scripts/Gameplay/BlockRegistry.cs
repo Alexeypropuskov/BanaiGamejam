@@ -6,6 +6,7 @@ using UnityEngine;
 
 	public class BlockRegistry : MonoBehaviour
 	{
+		[HideInInspector]
 		public GameInstaller Installer;
 		
 		public List<Block> AllBlocks = new(1024);

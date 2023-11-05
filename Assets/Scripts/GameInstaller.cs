@@ -14,6 +14,7 @@ public class GameInstaller : MonoBehaviour
     private Transform _cameraTransform;
     public Comics _comics;
     public Comics _lastComics;
+    [HideInInspector]
     public Target Target;
     
     public Controls Controls;
