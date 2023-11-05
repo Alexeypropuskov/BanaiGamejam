@@ -1224,7 +1224,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8549347129397832899
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1759,7 +1759,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 43a7d98bd4222b64e933596512dc09ad, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b3377d2b2af6ecd40a057c378f65962c, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4220,7 +4220,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 157524091224875912, guid: 9c44d02d639a15448a9de05f85cd688d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -676
+      value: -729
       objectReference: {fileID: 0}
     - target: {fileID: 157524091224875912, guid: 9c44d02d639a15448a9de05f85cd688d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
