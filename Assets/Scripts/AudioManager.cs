@@ -1,66 +1,91 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 
-	//Sample Singleton pattern
+//Sample Singleton pattern
 public class AudioManager : MonoBehaviour
 {
 	public const string c_volumePresetKey = "Volume";
 
-	private enum AudioSourceType : byte
-	{
-		None = 0,
-		Tower = 1,
-		Projectile = 2,
-	}
-
+	private Coroutine _coroutine;
 	private float _volume;
 
 	private static AudioManager _instance;
-	private readonly Dictionary<AudioSourceType, AudioSource> _sources = new(8);
 
 	[SerializeField]
-	private AudioSource _towerSource;
+	private AudioSource _backgroundSource;
+	[SerializeField]
+	private AudioSource _attackSource;
+	[SerializeField]
+	private AudioSource _eventsSource;
+	[SerializeField]
+	private AudioSource _pigSource;
 
 	[SerializeField]
-	private AudioSource _projectileSource;
+	private AudioClip _click;
+	[SerializeField]
+	private AudioClip _noEnergy;
+	[SerializeField]
+	private AudioClip _win;
+	[SerializeField]
+	private AudioClip _lose;
+	[SerializeField]
+	private AudioClip _pig;
+	[SerializeField]
+	private float _pigDuration;
 
+	public float MultClick = 2f;
+	
 	public static float Volume
 	{
 		get => _instance._volume;
 		set
 		{
 			_instance._volume = value;
-			//_towerSource.volume = value;
-			//_projectileSource.volume = value;
+			_instance._backgroundSource.volume = value;
+			_instance._attackSource.volume = value * _instance.MultClick;
+			_instance._eventsSource.volume = value * _instance.MultClick;
 		}
 	}
 
-	public static void PlayAttack(AudioClip clip)
-		=> _instance.PlayClip(clip, AudioSourceType.Tower);
+	public static void SetSoundtrack(AudioClip sound)
+		=> _instance._backgroundSource.clip = sound;
+	
+	public static void PlayAttack()
+		=> _instance._attackSource.Play();
 
-	public static void PlayHit(AudioClip clip)
-		=> _instance.PlayClip(clip, AudioSourceType.Projectile);
+	public static void StopAttack()
+		=> _instance._attackSource.Stop();
 
-	private void PlayClip(AudioClip clip, AudioSourceType type)
+	public static void PlayEventClick()
+		=> _instance._eventsSource.PlayOneShot(_instance._click);
+	public static void PlayEventNoEnergy()
+		=> _instance._eventsSource.PlayOneShot(_instance._noEnergy);
+	public static void PlayEventWin()
+		=> _instance._eventsSource.PlayOneShot(_instance._win);
+	public static void PlayEventLose()
+		=> _instance._eventsSource.PlayOneShot(_instance._lose);
+	public static void PlayEventPig() //todo
 	{
-		if (_sources.TryGetValue(type, out var source))
-			source.PlayOneShot(clip);
+		if(_instance._coroutine != null)
+			_instance.StopCoroutine(_instance._coroutine);
+		_instance._coroutine = _instance.StartCoroutine(_instance.Pig());
 	}
 
-
-
+	private IEnumerator Pig()
+	{
+		_pigSource.Stop();
+		_pigSource.Play();
+		yield return new WaitForSeconds(_pigDuration);
+		_pigSource.Stop();
+		_coroutine = null;
+	}
+	
 	private void Awake()
 	{
 		_instance = this;
 
-		Volume = PlayerPrefs.GetFloat(c_volumePresetKey, 1f);
-
+		Volume = PlayerPrefs.GetFloat(c_volumePresetKey, 0.3f);
 		DontDestroyOnLoad(gameObject);
-
-		/*if(_towerSource != null)
-			_sources.Add(AudioSourceType.Tower, _towerSource);
-		if(_projectileSource != null)
-			_sources.Add(AudioSourceType.Projectile, _projectileSource);*/
 	}
 
 	private void OnDestroy()

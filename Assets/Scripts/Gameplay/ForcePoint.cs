@@ -38,9 +38,6 @@ using UnityEngine.UI;
 		[Space]
 		public float MultDeltaScroll = 100f;
 		
-		
-		private bool _move;
-		public float _moveSpeed = 3f;
 		private void Update()
 		{
 			if (CalcLogic())
@@ -49,12 +46,14 @@ using UnityEngine.UI;
 				{
 					_isEffect = true;
 					Effect.Play();
+					AudioManager.PlayAttack();
 				}
 			}
 			else if (_isEffect)
 			{
 				_isEffect = false;
 				Effect.Stop();
+				AudioManager.StopAttack();
 			}
 		}
 
@@ -82,16 +81,13 @@ using UnityEngine.UI;
 			var point = _camera.ScreenToWorldPoint(new Vector3(mouse.x, mouse.y, 10f));
 			point.z = 0f;
 			transform.position = point;
-			
-			if (_move)
-				_camera.transform.position += Vector3.right * (_moveSpeed * TimeManager.DeltaTime);
 		}
 
 		private void PowerUse()
 		{
 			CurrentPower -= Force * PowerCostPerUnitInSec * TimeManager.FixedDeltaTime;
 			FillPower.fillAmount = CurrentPower / PowerLimit;
-			FillValueText.text = Mathf.RoundToInt(CurrentPower).ToString();
+			FillValueText.text = Mathf.Clamp(Mathf.RoundToInt(CurrentPower), 0f, float.MaxValue).ToString();
 			if (Physics.Raycast(transform.position, Vector3.right, out var hit, Distance))
 				hit.rigidbody.AddForceAtPosition(Vector3.right * Force, hit.point, ForceMode.Force);
 		}
@@ -104,8 +100,6 @@ using UnityEngine.UI;
 			Controls.Mouse.Hold.performed += HoldOnperformed;
 			Controls.Mouse.Hold.canceled += HoldOncanceled;
 			Controls.Mouse.DeltaPower.performed += DeltaPowerOnperformed;
-			Controls.Mouse.Right.performed += OnRight;
-			Controls.Mouse.Right.canceled += StopRight;
 
 			PowerSlider.minValue = MinForce;
 			MinPowerValueText.text = MinForce.ToString();
@@ -118,9 +112,6 @@ using UnityEngine.UI;
 			FillPower.fillAmount = 1f;
 			FillValueText.text = PowerLimit.ToString();
 		}
-
-		private void OnRight(InputAction.CallbackContext a) => _move = true;
-		private void StopRight(InputAction.CallbackContext a) => _move = false;
 		
 		private void DeltaPowerOnperformed(InputAction.CallbackContext obj)
 			=> PowerSlider.value += obj.ReadValue<Vector2>().y / MultDeltaScroll;

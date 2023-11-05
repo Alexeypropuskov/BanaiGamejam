@@ -35,6 +35,7 @@ namespace Interfaces
 
 		private void Awake()
 		{
+			return;
 			var found = FindObjectsOfType<Foundation>();
 			Foundations = new Vector3[found.Length];
 			for (int i = 0; i < found.Length; i++)
@@ -53,6 +54,7 @@ namespace Interfaces
 
 		public void StartMove()
 		{
+			AudioManager.PlayEventClick();
 			Num++;
 			if (Num + 1 >= Foundations.Length)
 			{

@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -7,6 +6,7 @@ using UnityEngine.UI;
 public class FocusMousePanel : MonoBehaviour, IPointerMoveHandler, IPointerExitHandler, IPointerEnterHandler
 	{
 		private Camera _camera;
+		private RectTransform _canvas;
 		
 		public RectTransform Cursor;
 		[HideInInspector]
@@ -16,10 +16,10 @@ public class FocusMousePanel : MonoBehaviour, IPointerMoveHandler, IPointerExitH
 		
 		public void OnPointerMove(PointerEventData eventData)
 		{
-			var pos = new Vector3(eventData.position.x, eventData.position.y, 0f);
-			pos.x -= Screen.currentResolution.width / 2f;
-			pos.y -= Screen.currentResolution.height / 2f;
-			Cursor.localPosition = pos;
+			RectTransformUtility.ScreenPointToLocalPointInRectangle(_canvas, eventData.position,
+				null, out var pos);
+
+			Cursor.anchoredPosition = pos;
 			
 			//todo поворачивать курсор
 		}
@@ -28,6 +28,7 @@ public class FocusMousePanel : MonoBehaviour, IPointerMoveHandler, IPointerExitH
 		{
 			_camera = FindObjectOfType<Camera>();
 			ImageCursor = Cursor.GetComponent<Image>();
+			_canvas = GetComponentInParent<Canvas>().transform as RectTransform;
 		}
 
 		public void OnPointerExit(PointerEventData eventData)
