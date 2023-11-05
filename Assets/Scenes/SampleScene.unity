@@ -2910,6 +2910,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5394223675926412952, guid: 09fd05910e1466f4e92098dc4f8efb47, type: 3}
+      propertyPath: m_Type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5394223675926412952, guid: 09fd05910e1466f4e92098dc4f8efb47, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5394223675926412952, guid: 09fd05910e1466f4e92098dc4f8efb47, type: 3}
+      propertyPath: m_FillMethod
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5394223675926412952, guid: 09fd05910e1466f4e92098dc4f8efb47, type: 3}
+      propertyPath: m_FillOrigin
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5840988461795022415, guid: 09fd05910e1466f4e92098dc4f8efb47, type: 3}
       propertyPath: m_Name
       value: SceneRoot
