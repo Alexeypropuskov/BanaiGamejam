@@ -82,6 +82,11 @@ public class AudioManager : MonoBehaviour
 	
 	private void Awake()
 	{
+		if (_instance != null)
+		{
+			Destroy(gameObject);
+			return;
+		}
 		_instance = this;
 
 		Volume = PlayerPrefs.GetFloat(c_volumePresetKey, 0.3f);
