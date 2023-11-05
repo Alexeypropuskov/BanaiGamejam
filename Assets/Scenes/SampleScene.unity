@@ -11016,6 +11016,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 35062711536863093, guid: 09fd05910e1466f4e92098dc4f8efb47, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 102260409594297606, guid: 09fd05910e1466f4e92098dc4f8efb47, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0.5
@@ -11184,6 +11188,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7573382190720582769, guid: 09fd05910e1466f4e92098dc4f8efb47, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7653308536000945289, guid: 09fd05910e1466f4e92098dc4f8efb47, type: 3}
       propertyPath: m_Size.x
       value: 0.5
@@ -11196,6 +11204,10 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7911392973223395092, guid: 09fd05910e1466f4e92098dc4f8efb47, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b3377d2b2af6ecd40a057c378f65962c, type: 3}
     - target: {fileID: 8038197858258709180, guid: 09fd05910e1466f4e92098dc4f8efb47, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
