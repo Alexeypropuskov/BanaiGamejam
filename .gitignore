@@ -90,3 +90,4 @@ SourceGenerators/SourceGenerators/bin
 
 !SourceGenerators.sln
 !SourceGenerators.csproj
+ProjectSettings/ProjectSettings.asset
