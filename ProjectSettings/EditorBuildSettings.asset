@@ -9,6 +9,18 @@ EditorBuildSettings:
     path: Assets/Scenes/Main-Menu.unity
     guid: e1f4195e84e728546984c55beb170a49
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/Scenes/vLAD/Level 1.unity
+    guid: 83a3fc8e230df9341ac4db31ba91e9fb
+  - enabled: 1
+    path: Assets/Scenes/vLAD/Level 2.unity
+    guid: e61abe956d4de854bb6cae1ea07b5c2f
+  - enabled: 1
+    path: Assets/Scenes/vLAD/Level 3.unity
+    guid: 1b59d1c88a7fb334e94cefbfc1b107b9
+  - enabled: 1
+    path: Assets/Scenes/vLAD/Level 4.unity
+    guid: 77bb83342ec103b41a36a7c0400ba878
+  - enabled: 1
+    path: Assets/Scenes/vLAD/Level 7.unity
+    guid: 0985bff81b2a21c48b48faa5b4958e15
   m_configObjects: {}

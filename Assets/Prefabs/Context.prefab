@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcefeb2315a398141b434f957d597c74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _comics: {fileID: 0}
   PausePanel: {fileID: 0}
   _winPanel: {fileID: 0}
   _nextGameButton: {fileID: 0}
@@ -56,4 +57,4 @@ MonoBehaviour:
   DelayBeforeDefaultMoveSpeed: 5
   DefaultMoveSpeed: 0.2
   AdditionalMoveSpeed: 3
-  Soundtrack: {fileID: 8300000, guid: 4c2ac7394b9ab2947883fa059f430611, type: 3}
+  Soundtrack: {fileID: 8300000, guid: 13a4936d0fbf5eb4c81e81e301ee8597, type: 3}
