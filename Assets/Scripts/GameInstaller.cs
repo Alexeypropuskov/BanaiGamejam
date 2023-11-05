@@ -8,13 +8,11 @@ using UnityEngine.UI;
 
 public class GameInstaller : MonoBehaviour
 {
+    private bool _move;
     private bool _finish;
     private BlockRegistry _registry;
-    private Camera _camera;
-    private Transform _cameraTransform;
+    private Transform _camera;
     public Comics _comics;
-    public Comics _lastComics;
-    public Target Target;
     
     public Controls Controls;
     public GameObject PausePanel;
@@ -32,28 +30,31 @@ public class GameInstaller : MonoBehaviour
     public TextMeshProUGUI FallBlocks;
     
     [Space]
-    //public int MinBlockFallForWin = 3;
+    public int MinBlockFallForWin = 3;
     public float LoseDelay = 5f;
 
     [Header("---Movement---")]
+    [Range(0f, 60f)]
+    public float DelayBeforeDefaultMoveSpeed = 5f;
+    [Range(0f, 10f)]
+    public float DefaultMoveSpeed = 0.2f;
     [Range(0f, 100f)]
-    public float MoveSpeed = 3f;
+    public float AdditionalMoveSpeed = 3f;
 
     [Header("---Sound---")]
     public AudioClip Soundtrack;
     
     private void Awake()
     {
-        _camera = FindObjectOfType<Camera>();
-        Target = FindObjectOfType<Target>();
-        _cameraTransform = _camera.transform;
+        _comics = FindObjectOfType<Comics>();
+        _camera = FindObjectOfType<Camera>().transform;
         Controls = new Controls();
         Controls.Enable();
         
         _registry = FindObjectOfType<BlockRegistry>();
         Controls.Mouse.Pause.performed += OnPause;
-        //Controls.Mouse.Right.performed += OnRight;
-        //Controls.Mouse.Right.canceled += StopRight;
+        Controls.Mouse.Right.performed += OnRight;
+        Controls.Mouse.Right.canceled += StopRight;
         PausePanel.SetActive(false);
 
         _winPanel.SetActive(false);
@@ -62,7 +63,7 @@ public class GameInstaller : MonoBehaviour
         _nextGameButton.onClick.AddListener(LoadNextLevel);
         _restartGameButton.onClick.AddListener(Restart);
 
-        //FallBlocks.text = $"{_registry.Falls.ToString()}/{MinBlockFallForWin}";
+        FallBlocks.text = $"{_registry.Falls.ToString()}/{MinBlockFallForWin}";
     }
 
     private void Start()
@@ -77,36 +78,28 @@ public class GameInstaller : MonoBehaviour
         }
         else
             TimeManager.IsGame = true;
-        AudioManager.SetSoundtrack(Soundtrack);
     }
 
     public void UpdateScore()
-    {/*
+    {
         FallBlocks.text = $"{_registry.Falls.ToString()}/{MinBlockFallForWin}";
         if (_registry.Falls >= MinBlockFallForWin)
         {
             _winPanel.SetActive(true);
             TimeManager.IsGame = false;
-        }*/
+        }
     }
 
     public void Win()
     {
         if (_finish) return;
         _finish = true;
-        if (_registry.Falls >= Target.CountNeedToFall())
+        if (_registry.Falls >= MinBlockFallForWin)
         {
             _winPanel.SetActive(true);
             AudioManager.PlayEventWin();
             TimeManager.IsGame = false;
-            
-            if(_lastComics != null)
-            {
-                foreach (var block in _registry.AllBlocks)
-                    block.SetFroze(true);
-                _lastComics.Show();
-                _lastComics.CloseButton.onClick.AddListener(LoadNextLevel);
-            }
+            return;
         }
     }
     
@@ -121,41 +114,18 @@ public class GameInstaller : MonoBehaviour
     {
         if (!TimeManager.IsGame) return;
 
-        var target = Target.transform.position;
-        target.x += OffsetTarget;
-        var view = _camera.WorldToViewportPoint(target);
-        if (view.x is >= 0 and <= 1 && view.y is >= 0 and <= 1 && view.z > 0) { }
-        else
+        if (DelayBeforeDefaultMoveSpeed > 0f)
         {
-            var pos = _cameraTransform.position;
-            pos.x += MoveSpeed * TimeManager.DeltaTime;
-            _cameraTransform.position = pos;
-            //if (_move != null)
-           //     StopCoroutine(_move);
-            //_move = StartCoroutine(Move());
+            DelayBeforeDefaultMoveSpeed -= TimeManager.DeltaTime;
+            return;
         }
+
+        var speed = _move ? AdditionalMoveSpeed : DefaultMoveSpeed;
+        _camera.position += Vector3.right * (speed * TimeManager.DeltaTime);
     }
 
-    private Coroutine _move;
-    public float OffsetTarget = 5f;
-    
-    private IEnumerator Move()
-    {
-        var target = _cameraTransform.position;
-        target.x = Target.transform.position.x;
-        var time = 0f;
-        while (MoveSpeed > time)
-        {
-            _cameraTransform.position = Vector3.Lerp(_cameraTransform.position, target, 1f - (MoveSpeed - time) / MoveSpeed);
-            time += TimeManager.DeltaTime;
-            yield return null;
-        }
-			
-        _move = null;
-    }
-    
-    //private void OnRight(InputAction.CallbackContext a) => _move = true;
-    ///private void StopRight(InputAction.CallbackContext a) => _move = false;
+    private void OnRight(InputAction.CallbackContext a) => _move = true;
+    private void StopRight(InputAction.CallbackContext a) => _move = false;
     
     private IEnumerator LoseDelayGame()
     {
