@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 	public class ForcePoint : MonoBehaviour
 	{
+		private Camera _camera;
+		
 		public Controls Controls;
 
 		public Slider PowerSlider;
@@ -31,17 +33,16 @@ using UnityEngine.UI;
 		public float PowerCostPerUnitInSec = 5f;
 		[HideInInspector]
 		public float CurrentPower;
+		public FocusMousePanel Focus;
 
 		[Space]
 		public float MultDeltaScroll = 100f;
-		
-		[Space]
-		public float MoveSpeed = 3f;
 		
 		private void FixedUpdate()
 		{
 			if (!TimeManager.IsGame) return;
 			
+			if (!Focus.Enabled) return;
 			Movement();
 			
 			CanWork = Physics.Raycast(transform.position, Vector3.right, out var hit, Distance);
@@ -58,9 +59,8 @@ using UnityEngine.UI;
 
 		private void Movement()
 		{
-			var move = Controls.Mouse.Movement.ReadValue<Vector2>();
-			move *= MoveSpeed * Time.fixedDeltaTime;
-			transform.position += new Vector3(move.x, move.y);
+			var mouse = Mouse.current.position.value;
+			transform.position = _camera.ScreenToWorldPoint(new Vector3(mouse.x, mouse.y, 10f));
 		}
 
 		private void PowerUse(RaycastHit hit)
@@ -74,6 +74,8 @@ using UnityEngine.UI;
 
 		private void Start()
 		{
+			_camera = FindObjectOfType<Camera>();
+			
 			Controls = FindObjectOfType<GameInstaller>().Controls;
 			Controls.Mouse.Hold.performed += HoldOnperformed;
 			Controls.Mouse.Hold.canceled += HoldOncanceled;
@@ -88,7 +90,7 @@ using UnityEngine.UI;
 
 			CurrentPower = PowerLimit;
 			FillPower.fillAmount = 1f;
-			FillValueText.text = $"{PowerLimit} / {PowerLimit}";
+			FillValueText.text = PowerLimit.ToString();
 		}
 
 		private void DeltaPowerOnperformed(InputAction.CallbackContext obj)
