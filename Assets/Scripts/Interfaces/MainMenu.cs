@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
+	public static int Progress = 1;
+	
 	public const string c_progressKey = "Progress";
 	private const int c_shift = 1;//0 - MainMenu
 
@@ -36,13 +38,14 @@ public class MainMenu : MonoBehaviour
 	{
 		AudioManager.PlayEventClick();
 		PlayerPrefs.SetInt(c_progressKey, 0);
+		PlayerPrefs.Save();
 	}
 
 	public void ContinueGame()
 	{
+		Progress = 1;
 		AudioManager.PlayEventClick();
-		var r = PlayerPrefs.GetInt(c_progressKey);
-		SceneManager.LoadScene(r + c_shift);
+		SceneManager.LoadScene(Progress);
 	}
 
 	public void Exit()

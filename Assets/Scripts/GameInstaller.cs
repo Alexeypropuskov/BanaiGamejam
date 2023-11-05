@@ -97,13 +97,9 @@ public class GameInstaller : MonoBehaviour
         {
             if (_finish) return;
             _finish = true;
-            
             _winPanel.SetActive(true);
             AudioManager.PlayEventWin();
             TimeManager.IsGame = false;
-            var r = PlayerPrefs.GetInt(MainMenu.c_progressKey);
-            PlayerPrefs.SetInt(MainMenu.c_progressKey, r + 1);
-            
             if(_lastComics != null)
             {
                 foreach (var block in _registry.AllBlocks)
@@ -179,9 +175,9 @@ public class GameInstaller : MonoBehaviour
         var count = SceneManager.sceneCount;
         var index = SceneManager.GetActiveScene().buildIndex;
         index = (index + 1) % count;
-        
-        PlayerPrefs.SetInt(MainMenu.c_progressKey, index);
-        SceneManager.LoadScene(index);
+
+        MainMenu.Progress++;
+        SceneManager.LoadScene(MainMenu.Progress);
     }
 
     private void Restart()
