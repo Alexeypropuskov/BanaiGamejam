@@ -67,7 +67,7 @@ using UnityEngine.UI;
 			if (!IsOn) return false;
 			if (CurrentPower <= 0f)
 			{
-				FindObjectOfType<GameInstaller>().GameOver(this);
+				FindObjectOfType<GameInstaller>().Lose();
 				return false;
 			}
 			PowerUse();
@@ -106,7 +106,7 @@ using UnityEngine.UI;
 			PowerSlider.maxValue = MaxForce;
 			MaxPowerValueText.text = MaxForce.ToString();
 			PowerSlider.onValueChanged.AddListener(OnPowerChanged);
-			PowerSlider.value = (MaxForce + MinForce) / 2f;
+			PowerSlider.value = MaxForce;// (MaxForce + MinForce) / 2f;
 
 			CurrentPower = PowerLimit;
 			FillPower.fillAmount = 1f;

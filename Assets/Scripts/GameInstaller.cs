@@ -89,8 +89,8 @@ public class GameInstaller : MonoBehaviour
             TimeManager.IsGame = false;
         }
     }
-    
-    public void GameOver(ForcePoint point)
+
+    public void Win()
     {
         if (_finish) return;
         _finish = true;
@@ -101,10 +101,13 @@ public class GameInstaller : MonoBehaviour
             TimeManager.IsGame = false;
             return;
         }
-        if (point.CurrentPower <= 0)
-        {
-            StartCoroutine(LoseDelayGame());
-        }
+    }
+    
+    public void Lose()
+    {
+        if (_finish) return;
+        _finish = true;
+        StartCoroutine(LoseDelayGame());
     }
 
     private void LateUpdate()

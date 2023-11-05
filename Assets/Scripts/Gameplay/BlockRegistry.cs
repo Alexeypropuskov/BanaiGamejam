@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,6 +15,8 @@ using UnityEngine;
 		public int Falls;
 		[Range(0.5f, 10f)]
 		public float DelayForClearVelocity = 1f;
+
+		public event Action<Block> OnBlockFalled;
 		
 		private IEnumerator Start()
 		{
@@ -41,6 +44,7 @@ using UnityEngine;
 			{
 				Installer.UpdateScore();
 				Falls++;
+				OnBlockFalled?.Invoke(body);
 			}
 
 			StartCoroutine(HideDelay(body.gameObject));
