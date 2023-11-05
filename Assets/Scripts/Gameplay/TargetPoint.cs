@@ -27,7 +27,7 @@ public class TargetPoint : MonoBehaviour
 		if (Limit <= 0)
 		{
 			_reg.OnBlockFalled -= CheckBlock;
-			_target.NeedMove();
+			_target.NeedMove(transform.position.x);
 		}
 	}
 

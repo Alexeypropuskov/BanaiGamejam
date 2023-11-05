@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Target : MonoBehaviour
 {
-	private int _current = -1;
+	private float _x = float.MinValue;
 	private bool _needMove;
 	private TargetPoint[] _targets;
 
@@ -24,7 +24,7 @@ public class Target : MonoBehaviour
 			yield return null;
 		}
 
-		NeedMove();
+		NeedMove(_targets[0].transform.position.x);
 	}
 
 	private int Comparison(TargetPoint x, TargetPoint y)
@@ -45,25 +45,35 @@ public class Target : MonoBehaviour
 		position += Vector3.right * (MoveSpeed * TimeManager.DeltaTime);
 		transform.position = position;
 
-		var target = _targets[_current].transform.position;
-		if (target.x <= position.x)
+		if (_x <= position.x)
 		{
 			_needMove = false;
 			Image.flipX = !Image.flipX;
 		}
 	}
 
-	public void NeedMove()
+	public int CountNeedToFall()
 	{
-		_current = Mathf.Clamp(_current + 1, 0, _targets.Length - 1);
-		if (_needMove) return;
-		
-		if (_current >= _targets.Length)
+		var count = 0;
+		foreach (var target in _targets)
+		{
+			count += target.Limit;
+		}
+
+		return count;
+	}
+	
+	public void NeedMove(float x)
+	{
+		_x = Mathf.Max(x, _x);
+		if (Mathf.Approximately(_x, _targets[^1].transform.position.x))
 		{
 			_needMove = false;
 			FindObjectOfType<GameInstaller>().Win();
 			return;
 		}
+
+		if (_needMove) return;
 
 		_needMove = true;
 		Image.flipX = !Image.flipX;

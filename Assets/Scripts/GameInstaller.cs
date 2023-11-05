@@ -13,7 +13,8 @@ public class GameInstaller : MonoBehaviour
     private Camera _camera;
     private Transform _cameraTransform;
     public Comics _comics;
-    public Transform Target;
+    public Comics _lastComics;
+    public Target Target;
     
     public Controls Controls;
     public GameObject PausePanel;
@@ -31,7 +32,7 @@ public class GameInstaller : MonoBehaviour
     public TextMeshProUGUI FallBlocks;
     
     [Space]
-    public int MinBlockFallForWin = 3;
+    //public int MinBlockFallForWin = 3;
     public float LoseDelay = 5f;
 
     [Header("---Movement---")]
@@ -43,9 +44,8 @@ public class GameInstaller : MonoBehaviour
     
     private void Awake()
     {
-        _comics = FindObjectOfType<Comics>();
         _camera = FindObjectOfType<Camera>();
-        Target = FindObjectOfType<Target>().transform;
+        Target = FindObjectOfType<Target>();
         _cameraTransform = _camera.transform;
         Controls = new Controls();
         Controls.Enable();
@@ -62,7 +62,7 @@ public class GameInstaller : MonoBehaviour
         _nextGameButton.onClick.AddListener(LoadNextLevel);
         _restartGameButton.onClick.AddListener(Restart);
 
-        FallBlocks.text = $"{_registry.Falls.ToString()}/{MinBlockFallForWin}";
+        //FallBlocks.text = $"{_registry.Falls.ToString()}/{MinBlockFallForWin}";
     }
 
     private void Start()
@@ -81,25 +81,32 @@ public class GameInstaller : MonoBehaviour
     }
 
     public void UpdateScore()
-    {
+    {/*
         FallBlocks.text = $"{_registry.Falls.ToString()}/{MinBlockFallForWin}";
         if (_registry.Falls >= MinBlockFallForWin)
         {
             _winPanel.SetActive(true);
             TimeManager.IsGame = false;
-        }
+        }*/
     }
 
     public void Win()
     {
         if (_finish) return;
         _finish = true;
-        if (_registry.Falls >= MinBlockFallForWin)
+        if (_registry.Falls >= Target.CountNeedToFall())
         {
             _winPanel.SetActive(true);
             AudioManager.PlayEventWin();
             TimeManager.IsGame = false;
-            return;
+            
+            if(_lastComics != null)
+            {
+                foreach (var block in _registry.AllBlocks)
+                    block.SetFroze(true);
+                _lastComics.Show();
+                _lastComics.CloseButton.onClick.AddListener(LoadNextLevel);
+            }
         }
     }
     
@@ -114,23 +121,28 @@ public class GameInstaller : MonoBehaviour
     {
         if (!TimeManager.IsGame) return;
 
-        var target = Target.position;
+        var target = Target.transform.position;
+        target.x += OffsetTarget;
         var view = _camera.WorldToViewportPoint(target);
         if (view.x is >= 0 and <= 1 && view.y is >= 0 and <= 1 && view.z > 0) { }
         else
         {
-            if (_move != null)
-                StopCoroutine(_move);
-            _move = StartCoroutine(Move());
+            var pos = _cameraTransform.position;
+            pos.x += MoveSpeed * TimeManager.DeltaTime;
+            _cameraTransform.position = pos;
+            //if (_move != null)
+           //     StopCoroutine(_move);
+            //_move = StartCoroutine(Move());
         }
     }
 
     private Coroutine _move;
+    public float OffsetTarget = 5f;
     
     private IEnumerator Move()
     {
         var target = _cameraTransform.position;
-        target.x = Target.position.x;
+        target.x = Target.transform.position.x;
         var time = 0f;
         while (MoveSpeed > time)
         {
