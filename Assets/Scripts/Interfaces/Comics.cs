@@ -27,7 +27,13 @@ using UnityEngine.UI;
 			NextButton.onClick.AddListener(NextPage);
 			PrevButton.onClick.AddListener(PrevPage);
 			CloseButton.onClick.AddListener(Close);
-			
+
+			if (_lists.Length == 0)
+			{
+				FindObjectOfType<GameInstaller>().CloseComics();
+				Close();
+				return;
+			}
 			_lists[_index].SetActive(true);
 		}
 

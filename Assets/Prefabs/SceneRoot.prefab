@@ -998,6 +998,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1792720404410378683 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5775548984831781753, guid: 23729ab3062701540bdab2087c8e2566, type: 3}
+  m_PrefabInstance: {fileID: 5244400560991208130}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e4d3e1895f74c869f75d6ce06340686, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1994843790854693246 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6010266311692919740, guid: 23729ab3062701540bdab2087c8e2566, type: 3}
@@ -1119,6 +1130,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3283987440556474338}
     m_Modifications:
+    - target: {fileID: 3257114146318479930, guid: e0634e28d2fa6b64da0d176a34c8058c, type: 3}
+      propertyPath: _comics
+      value: 
+      objectReference: {fileID: 1792720404410378683}
     - target: {fileID: 3257114146318479930, guid: e0634e28d2fa6b64da0d176a34c8058c, type: 3}
       propertyPath: _winPanel
       value: 

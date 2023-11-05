@@ -161,7 +161,7 @@ public class GameInstaller : MonoBehaviour
             block.SetFroze(true);
     }
 
-    private void CloseComics()
+    public void CloseComics()
     {
         TimeManager.IsGame = true;
         foreach (var block in _registry.AllBlocks)
