@@ -87,7 +87,7 @@ using UnityEngine.UI;
 		{
 			CurrentPower -= Force * PowerCostPerUnitInSec * TimeManager.FixedDeltaTime;
 			FillPower.fillAmount = CurrentPower / PowerLimit;
-			FillValueText.text = Mathf.RoundToInt(CurrentPower).ToString();
+			FillValueText.text = Mathf.Clamp(Mathf.RoundToInt(CurrentPower), 0f, float.MaxValue).ToString();
 			if (Physics.Raycast(transform.position, Vector3.right, out var hit, Distance))
 				hit.rigidbody.AddForceAtPosition(Vector3.right * Force, hit.point, ForceMode.Force);
 		}

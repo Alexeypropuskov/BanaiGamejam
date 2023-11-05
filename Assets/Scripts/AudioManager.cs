@@ -32,6 +32,8 @@ public class AudioManager : MonoBehaviour
 	private AudioClip _pig;
 	[SerializeField]
 	private float _pigDuration;
+
+	public float MultClick = 2f;
 	
 	public static float Volume
 	{
@@ -40,8 +42,8 @@ public class AudioManager : MonoBehaviour
 		{
 			_instance._volume = value;
 			_instance._backgroundSource.volume = value;
-			_instance._attackSource.volume = value;
-			_instance._eventsSource.volume = value;
+			_instance._attackSource.volume = value * _instance.MultClick;
+			_instance._eventsSource.volume = value * _instance.MultClick;
 		}
 	}
 

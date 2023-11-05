@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -11,6 +12,7 @@ public class GameInstaller : MonoBehaviour
     private bool _finish;
     private BlockRegistry _registry;
     private Transform _camera;
+    private Comics _comics;
     
     public Controls Controls;
     public GameObject PausePanel;
@@ -44,6 +46,7 @@ public class GameInstaller : MonoBehaviour
     
     private void Awake()
     {
+        _comics = FindObjectOfType<Comics>();
         _camera = FindObjectOfType<Camera>().transform;
         Controls = new Controls();
         Controls.Enable();
@@ -54,8 +57,6 @@ public class GameInstaller : MonoBehaviour
         Controls.Mouse.Right.canceled += StopRight;
         PausePanel.SetActive(false);
 
-        TimeManager.IsGame = true;
-        
         _winPanel.SetActive(false);
         _losePanel.SetActive(false);
         _loseBacked.SetActive(false);
@@ -63,6 +64,20 @@ public class GameInstaller : MonoBehaviour
         _restartGameButton.onClick.AddListener(Restart);
 
         FallBlocks.text = $"{_registry.Falls.ToString()}/{MinBlockFallForWin}";
+    }
+
+    private void Start()
+    {
+        if (_comics != null)
+        {
+            TimeManager.IsGame = false;
+            foreach (var block in _registry.AllBlocks)
+                block.SetFroze(true);
+            _comics.Show();
+            _comics.CloseButton.onClick.AddListener(CloseComics);
+        }
+        else
+            TimeManager.IsGame = true;
     }
 
     public void UpdateScore()
@@ -144,5 +159,12 @@ public class GameInstaller : MonoBehaviour
         PausePanel.SetActive(true);
         foreach (var block in _registry.AllBlocks)
             block.SetFroze(true);
+    }
+
+    private void CloseComics()
+    {
+        TimeManager.IsGame = true;
+        foreach (var block in _registry.AllBlocks)
+            block.SetFroze(false);
     }
 }

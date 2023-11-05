@@ -7,22 +7,12 @@ public class MainMenu : MonoBehaviour
 {
 	public const string c_progressKey = "Progress";
 	private const int c_shift = 1;//0 - MainMenu
-	private int _tutIndex = 0;
-	private GameObject[] _tutorialPanels;
 
 	public Button ResetProgressButton;
 	public Button ContinueButton;
 	public Button ExitButton;
 	public Button TutorialButton;
 	public Slider VolumeSlider;
-
-	[Space]
-	public GameObject TutorialMain;
-	public GameObject RootTutorials;
-	public Button NextTutorialButton;
-	public Button PreviousTutorialButton;
-	public Button CloseTutorialButton;
-	
 	
 	[Header("---Sound---")]
 	public AudioClip MainMenuSound;
@@ -32,28 +22,14 @@ public class MainMenu : MonoBehaviour
 		ResetProgressButton.onClick.AddListener(ResetProgress);
 		ContinueButton.onClick.AddListener(ContinueGame);
 		ExitButton.onClick.AddListener(Exit);
-		TutorialButton.onClick.AddListener(Tutorial);
+		//TutorialButton.onClick.AddListener(Tutorial);
 		VolumeSlider.onValueChanged.AddListener(OnVolumeChanged);
-
-		var trs = RootTutorials.GetComponentsInChildren<Transform>();
-		_tutorialPanels = new GameObject[trs.Length - 1];
-		TutorialMain.SetActive(false);
-		for(var i = 1; i < trs.Length; i++)
-		{
-			_tutorialPanels[i - 1] = trs[i].gameObject;
-			_tutorialPanels[i - 1].SetActive(false);
-		}
-		if (_tutorialPanels.Length == 0)
-			TutorialButton.gameObject.SetActive(false);
-		
-		NextTutorialButton.onClick.AddListener(NextPage);
-		PreviousTutorialButton.onClick.AddListener(PrevPage);
-		CloseTutorialButton.onClick.AddListener(CloseTutorial);
 	}
 
 	private void Start()
 	{
 		AudioManager.SetSoundtrack(MainMenuSound);
+		VolumeSlider.value = PlayerPrefs.GetFloat(AudioManager.c_volumePresetKey, .3f);
 	}
 
 	public void ResetProgress()
@@ -81,37 +57,13 @@ public class MainMenu : MonoBehaviour
 	public void Tutorial()
 	{
 		AudioManager.PlayEventClick();
-		TutorialMain.SetActive(true);
+		/*TutorialMain.SetActive(true);
 		_tutIndex = 0;
-		_tutorialPanels[_tutIndex].SetActive(true);
+		_tutorialPanels[_tutIndex].SetActive(true);*/
 	}
 
 	public void OnVolumeChanged(float value)
 	{
 		AudioManager.Volume = value;
-	}
-
-	public void NextPage()
-	{
-		AudioManager.PlayEventClick();
-		_tutorialPanels[_tutIndex].SetActive(false);
-		_tutIndex = Mathf.Clamp(_tutIndex + 1, 0, _tutorialPanels.Length - 1);
-		_tutorialPanels[_tutIndex].SetActive(true);
-	}
-
-	public void PrevPage()
-	{
-		AudioManager.PlayEventClick();
-		_tutorialPanels[_tutIndex].SetActive(false);
-		_tutIndex = Mathf.Clamp(_tutIndex - 1, 0, _tutorialPanels.Length - 1);
-		_tutorialPanels[_tutIndex].SetActive(true);
-	}
-
-	public void CloseTutorial()
-	{
-		AudioManager.PlayEventClick();
-		TutorialMain.SetActive(false);
-		_tutorialPanels[_tutIndex].SetActive(false);
-		_tutIndex = 0;
 	}
 }
