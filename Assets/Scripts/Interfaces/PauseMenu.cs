@@ -29,11 +29,13 @@ public class PauseMenu : MonoBehaviour
 
 	public void OnRestart()
 	{
+		AudioManager.PlayEventClick();
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 	}
 
 	public void OnResume()
 	{
+		AudioManager.PlayEventClick();
 		TimeManager.IsGame = true;
 		gameObject.SetActive(false);
 		foreach (var block in _registry.AllBlocks)
@@ -42,6 +44,7 @@ public class PauseMenu : MonoBehaviour
 
 	public void OnExit()
 	{
+		AudioManager.PlayEventClick();
 		SceneManager.LoadScene(0);
 	}
 }

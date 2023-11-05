@@ -356,7 +356,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0.5, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: -0.28999978, y: -0.5200002, z: 0}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -656,7 +656,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1269120730060968, guid: dc479fd420f9fd846a2b05b55dc1e2f4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4103333903944158, guid: dc479fd420f9fd846a2b05b55dc1e2f4, type: 3}
       propertyPath: m_LocalScale.x
@@ -1092,7 +1092,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0.5, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: -0.21, y: 1.53, z: 0}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -1227,7 +1227,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0.5, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: 0.21000019, y: -0.52999973, z: 0}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -2218,7 +2218,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0.5, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.41000035, y: -0.5099993, z: 0}
+  m_ConnectedAnchor: {x: 0.4099994, y: -0.5099993, z: 0}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -2421,7 +2421,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0.5, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.40999988, y: -0.5099993, z: 0}
+  m_ConnectedAnchor: {x: 0.41000035, y: -0.5099993, z: 0}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -2705,7 +2705,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0.5, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: 0.29, y: 1.5200003, z: 0}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -2840,7 +2840,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0.5, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: 0.22000018, y: -0.48999977, z: 0}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -3168,7 +3168,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0.5, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.26999998, y: 50.51351, z: 0}
+  m_ConnectedAnchor: {x: -0.27000046, y: 50.51351, z: 0}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -3717,7 +3717,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0.5, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.29000008, y: -0.5700002, z: 0}
+  m_ConnectedAnchor: {x: -0.2899996, y: -0.5700002, z: 0}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -3847,7 +3847,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0.5, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.28999978, y: -0.5200002, z: 0}
+  m_ConnectedAnchor: {x: -0.2900017, y: -0.5200002, z: 0}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -4238,7 +4238,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0.5, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: -0.24, y: 7.6154532, z: 0}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -4714,7 +4714,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0.5, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: -0.26999998, y: 50.51351, z: 0}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -5232,7 +5232,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1044961141
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5361,7 +5361,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0.5, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: -0.22999984, y: -0.4800005, z: 0}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -5861,7 +5861,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0.5, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.22000018, y: -0.48999977, z: 0}
+  m_ConnectedAnchor: {x: 0.2199997, y: -0.48999977, z: 0}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -5938,7 +5938,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0.5, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: -0.41000003, y: 1.5099993, z: 0}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -6208,7 +6208,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0.5, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: 0.29000002, y: 1.5700006, z: 0}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -6956,7 +6956,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0.5, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: 0.22999999, y: 1.4800003, z: 0}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -7370,7 +7370,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0.5, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: 0.40999988, y: -0.5099993, z: 0}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -7814,7 +7814,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0.5, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: -0.29000008, y: -0.5700002, z: 0}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -8017,7 +8017,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0.5, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: -0.22, y: 1.4899995, z: 0}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -8344,7 +8344,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0.5, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.2899996, y: -0.5700002, z: 0}
+  m_ConnectedAnchor: {x: -0.2900015, y: -0.5700002, z: 0}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -8923,7 +8923,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0.5, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.21000019, y: -0.52999973, z: 0}
+  m_ConnectedAnchor: {x: 0.20999923, y: -0.52999973, z: 0}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -9168,6 +9168,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 102260409594297606, guid: 09fd05910e1466f4e92098dc4f8efb47, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 102260409594297606, guid: 09fd05910e1466f4e92098dc4f8efb47, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 102260409594297606, guid: 09fd05910e1466f4e92098dc4f8efb47, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 102260409594297606, guid: 09fd05910e1466f4e92098dc4f8efb47, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 102260409594297606, guid: 09fd05910e1466f4e92098dc4f8efb47, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 102260409594297606, guid: 09fd05910e1466f4e92098dc4f8efb47, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -39
+      objectReference: {fileID: 0}
     - target: {fileID: 199253024636075774, guid: 09fd05910e1466f4e92098dc4f8efb47, type: 3}
       propertyPath: PowerLimit
       value: 90000

@@ -23,6 +23,10 @@ public class MainMenu : MonoBehaviour
 	public Button PreviousTutorialButton;
 	public Button CloseTutorialButton;
 	
+	
+	[Header("---Sound---")]
+	public AudioClip MainMenuSound;
+	
 	private void Awake()
 	{
 		ResetProgressButton.onClick.AddListener(ResetProgress);
@@ -47,18 +51,26 @@ public class MainMenu : MonoBehaviour
 		CloseTutorialButton.onClick.AddListener(CloseTutorial);
 	}
 
+	private void Start()
+	{
+		AudioManager.SetSoundtrack(MainMenuSound);
+	}
+
 	public void ResetProgress()
 	{
+		AudioManager.PlayEventClick();
 		PlayerPrefs.SetInt(c_progressKey, 0);
 	}
 
 	public void ContinueGame()
 	{
+		AudioManager.PlayEventClick();
 		SceneManager.LoadScene(PlayerPrefs.GetInt(c_progressKey) + c_shift);
 	}
 
 	public void Exit()
 	{
+		AudioManager.PlayEventClick();
 #if UNITY_EDITOR
 		UnityEditor.EditorApplication.isPlaying = false;
 #else
@@ -68,6 +80,7 @@ public class MainMenu : MonoBehaviour
 
 	public void Tutorial()
 	{
+		AudioManager.PlayEventClick();
 		TutorialMain.SetActive(true);
 		_tutIndex = 0;
 		_tutorialPanels[_tutIndex].SetActive(true);
@@ -80,6 +93,7 @@ public class MainMenu : MonoBehaviour
 
 	public void NextPage()
 	{
+		AudioManager.PlayEventClick();
 		_tutorialPanels[_tutIndex].SetActive(false);
 		_tutIndex = Mathf.Clamp(_tutIndex + 1, 0, _tutorialPanels.Length - 1);
 		_tutorialPanels[_tutIndex].SetActive(true);
@@ -87,6 +101,7 @@ public class MainMenu : MonoBehaviour
 
 	public void PrevPage()
 	{
+		AudioManager.PlayEventClick();
 		_tutorialPanels[_tutIndex].SetActive(false);
 		_tutIndex = Mathf.Clamp(_tutIndex - 1, 0, _tutorialPanels.Length - 1);
 		_tutorialPanels[_tutIndex].SetActive(true);
@@ -94,6 +109,7 @@ public class MainMenu : MonoBehaviour
 
 	public void CloseTutorial()
 	{
+		AudioManager.PlayEventClick();
 		TutorialMain.SetActive(false);
 		_tutorialPanels[_tutIndex].SetActive(false);
 		_tutIndex = 0;

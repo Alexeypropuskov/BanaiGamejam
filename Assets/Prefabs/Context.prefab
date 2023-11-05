@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6985869424961479536}
-  - component: {fileID: 6406873126523515715}
   - component: {fileID: 3257114146318479930}
   m_Layer: 0
   m_Name: Context
@@ -33,38 +32,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6406873126523515715
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7174569230026204546}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89715ad69b973a14899afa2c6730b30b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _scriptableObjectInstallers: []
-  _monoInstallers:
-  - {fileID: 3257114146318479930}
-  _installerPrefabs: []
-  _autoRun: 1
-  OnPreInstall:
-    m_PersistentCalls:
-      m_Calls: []
-  OnPostInstall:
-    m_PersistentCalls:
-      m_Calls: []
-  OnPreResolve:
-    m_PersistentCalls:
-      m_Calls: []
-  OnPostResolve:
-    m_PersistentCalls:
-      m_Calls: []
-  _parentNewObjectsUnderSceneContext: 0
-  _contractNames: []
-  _parentContractNames: []
 --- !u!114 &3257114146318479930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77,5 +44,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcefeb2315a398141b434f957d597c74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PauseButton: {fileID: 0}
   PausePanel: {fileID: 0}
+  _winPanel: {fileID: 0}
+  _nextGameButton: {fileID: 0}
+  _losePanel: {fileID: 0}
+  _loseBacked: {fileID: 0}
+  _restartGameButton: {fileID: 0}
+  FallBlocks: {fileID: 0}
+  MinBlockFallForWin: 3
+  LoseDelay: 5
+  DelayBeforeDefaultMoveSpeed: 5
+  DefaultMoveSpeed: 0.2
+  AdditionalMoveSpeed: 3
+  Soundtrack: {fileID: 8300000, guid: 4c2ac7394b9ab2947883fa059f430611, type: 3}
