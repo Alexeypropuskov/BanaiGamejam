@@ -22,8 +22,6 @@ using UnityEngine;
 			foreach (var block in blocks)
 				AllBlocks.Add(block);
 
-			//AllBlocks.Sort(Comparison);
-			
 			yield return new WaitForSeconds(DelayForClearVelocity);
 			foreach (var block in AllBlocks)
 			{
@@ -32,24 +30,6 @@ using UnityEngine;
 			}
 		}
 
-		/*private int Comparison(Block a, Block b)
-		{
-			var x = a.transform.position;
-			var y = b.transform.position;
-			if(x.y < y.y) return -1;
-			return x.y > y.y ? 1 : 0;
-		}
-
-		private void MoveToDownBlocks()
-		{
-			Physics.ClosestPoint()
-			var hits = new RaycastHit[]
-			foreach (var block in AllBlocks)
-			{
-				block.
-			}
-		}*/
-		
 		private void OnTriggerEnter(Collider other)
 		{
 			var body = other.GetComponent<Block>();
