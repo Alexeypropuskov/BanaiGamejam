@@ -462,7 +462,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 157524091224875912, guid: 9c44d02d639a15448a9de05f85cd688d, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 256
+      value: 364.725
       objectReference: {fileID: 0}
     - target: {fileID: 157524091224875912, guid: 9c44d02d639a15448a9de05f85cd688d, type: 3}
       propertyPath: m_SizeDelta.y
@@ -522,11 +522,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3727688503471841441, guid: 9c44d02d639a15448a9de05f85cd688d, type: 3}
       propertyPath: m_fontSize
-      value: 42.9
+      value: 55.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3727688503471841441, guid: 9c44d02d639a15448a9de05f85cd688d, type: 3}
+      propertyPath: m_margin.x
+      value: 19.625671
+      objectReference: {fileID: 0}
+    - target: {fileID: 3727688503471841441, guid: 9c44d02d639a15448a9de05f85cd688d, type: 3}
+      propertyPath: m_margin.z
+      value: 20.100647
       objectReference: {fileID: 0}
     - target: {fileID: 7157606501201334474, guid: 9c44d02d639a15448a9de05f85cd688d, type: 3}
       propertyPath: m_Name
       value: NextTowerButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 8699250020558820180, guid: 9c44d02d639a15448a9de05f85cd688d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
