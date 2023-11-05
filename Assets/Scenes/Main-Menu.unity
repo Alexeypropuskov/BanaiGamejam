@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748171, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -581,6 +581,7 @@ MonoBehaviour:
   NextTutorialButton: {fileID: 548757451}
   PreviousTutorialButton: {fileID: 1319474583}
   CloseTutorialButton: {fileID: 1339038738}
+  MainMenuSound: {fileID: 0}
 --- !u!1 &82972661
 GameObject:
   m_ObjectHideFlags: 0
@@ -1328,6 +1329,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TutorialButton
       objectReference: {fileID: 0}
+    - target: {fileID: 7157606501201334474, guid: 9c44d02d639a15448a9de05f85cd688d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8699250020558820180, guid: 9c44d02d639a15448a9de05f85cd688d, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 19
@@ -1555,8 +1560,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4904c2bb080bef40ac71149c79a7158, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _towerSource: {fileID: 0}
-  _projectileSource: {fileID: 0}
+  _backgroundSource: {fileID: 0}
+  _attackSource: {fileID: 0}
+  _eventsSource: {fileID: 0}
+  _pigSource: {fileID: 0}
+  _click: {fileID: 0}
+  _noEnergy: {fileID: 0}
+  _win: {fileID: 0}
+  _lose: {fileID: 0}
+  _pig: {fileID: 0}
+  _pigDuration: 0
 --- !u!4 &1198603403
 Transform:
   m_ObjectHideFlags: 0
@@ -2886,7 +2899,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 10, y: 0}
+  m_SizeDelta: {x: -6, y: -16}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2126045759
 MonoBehaviour:
@@ -2908,12 +2921,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: cf1462bc694c3c249831ad8ac5293aa2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8eb69fafe4f719b49bb2dd1a7358aaaa, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
