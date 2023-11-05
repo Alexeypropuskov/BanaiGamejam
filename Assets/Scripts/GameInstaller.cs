@@ -12,7 +12,7 @@ public class GameInstaller : MonoBehaviour
     private bool _finish;
     private BlockRegistry _registry;
     private Transform _camera;
-    private Comics _comics;
+    public Comics _comics;
     
     public Controls Controls;
     public GameObject PausePanel;
