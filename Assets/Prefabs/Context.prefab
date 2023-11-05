@@ -54,6 +54,7 @@ MonoBehaviour:
   _loseBacked: {fileID: 0}
   _restartGameButton: {fileID: 0}
   FallBlocks: {fileID: 0}
+  MinBlockFallForWin: 4
   LoseDelay: 3
   MoveSpeed: 3
   Soundtrack: {fileID: 8300000, guid: 230b0510ff6efef408190ee9f8a632e3, type: 3}

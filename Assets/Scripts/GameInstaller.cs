@@ -33,7 +33,7 @@ public class GameInstaller : MonoBehaviour
     public TextMeshProUGUI FallBlocks;
     
     [Space]
-    //public int MinBlockFallForWin = 3;
+    public int MinBlockFallForWin = 3;
     public float LoseDelay = 5f;
 
     [Header("---Movement---")]
@@ -82,21 +82,22 @@ public class GameInstaller : MonoBehaviour
     }
 
     public void UpdateScore()
-    {/*
+    {
         FallBlocks.text = $"{_registry.Falls.ToString()}/{MinBlockFallForWin}";
         if (_registry.Falls >= MinBlockFallForWin)
         {
             _winPanel.SetActive(true);
             TimeManager.IsGame = false;
-        }*/
+        }
     }
 
     public void Win()
     {
-        if (_finish) return;
-        _finish = true;
-        if (_registry.Falls >= Target.CountNeedToFall())
+        if (_registry.Falls >= MinBlockFallForWin)
         {
+            if (_finish) return;
+            _finish = true;
+            
             _winPanel.SetActive(true);
             AudioManager.PlayEventWin();
             TimeManager.IsGame = false;

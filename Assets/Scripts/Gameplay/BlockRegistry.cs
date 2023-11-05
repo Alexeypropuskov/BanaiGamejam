@@ -46,6 +46,7 @@ using UnityEngine;
 				Installer.UpdateScore();
 				Falls++;
 				OnBlockFalled?.Invoke(body);
+				Installer.Win();
 			}
 
 			StartCoroutine(HideDelay(body.gameObject));
