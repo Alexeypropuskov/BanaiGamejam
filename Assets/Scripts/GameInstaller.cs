@@ -8,11 +8,12 @@ using UnityEngine.UI;
 
 public class GameInstaller : MonoBehaviour
 {
-    private bool _move;
     private bool _finish;
     private BlockRegistry _registry;
-    private Transform _camera;
+    private Camera _camera;
+    private Transform _cameraTransform;
     public Comics _comics;
+    public Transform Target;
     
     public Controls Controls;
     public GameObject PausePanel;
@@ -34,12 +35,8 @@ public class GameInstaller : MonoBehaviour
     public float LoseDelay = 5f;
 
     [Header("---Movement---")]
-    [Range(0f, 60f)]
-    public float DelayBeforeDefaultMoveSpeed = 5f;
-    [Range(0f, 10f)]
-    public float DefaultMoveSpeed = 0.2f;
     [Range(0f, 100f)]
-    public float AdditionalMoveSpeed = 3f;
+    public float MoveSpeed = 3f;
 
     [Header("---Sound---")]
     public AudioClip Soundtrack;
@@ -47,14 +44,16 @@ public class GameInstaller : MonoBehaviour
     private void Awake()
     {
         _comics = FindObjectOfType<Comics>();
-        _camera = FindObjectOfType<Camera>().transform;
+        _camera = FindObjectOfType<Camera>();
+        Target = FindObjectOfType<Target>().transform;
+        _cameraTransform = _camera.transform;
         Controls = new Controls();
         Controls.Enable();
         
         _registry = FindObjectOfType<BlockRegistry>();
         Controls.Mouse.Pause.performed += OnPause;
-        Controls.Mouse.Right.performed += OnRight;
-        Controls.Mouse.Right.canceled += StopRight;
+        //Controls.Mouse.Right.performed += OnRight;
+        //Controls.Mouse.Right.canceled += StopRight;
         PausePanel.SetActive(false);
 
         _winPanel.SetActive(false);
@@ -78,6 +77,7 @@ public class GameInstaller : MonoBehaviour
         }
         else
             TimeManager.IsGame = true;
+        AudioManager.SetSoundtrack(Soundtrack);
     }
 
     public void UpdateScore()
@@ -114,18 +114,36 @@ public class GameInstaller : MonoBehaviour
     {
         if (!TimeManager.IsGame) return;
 
-        if (DelayBeforeDefaultMoveSpeed > 0f)
+        var target = Target.position;
+        var view = _camera.WorldToViewportPoint(target);
+        if (view.x is >= 0 and <= 1 && view.y is >= 0 and <= 1 && view.z > 0) { }
+        else
         {
-            DelayBeforeDefaultMoveSpeed -= TimeManager.DeltaTime;
-            return;
+            if (_move != null)
+                StopCoroutine(_move);
+            _move = StartCoroutine(Move());
         }
-
-        var speed = _move ? AdditionalMoveSpeed : DefaultMoveSpeed;
-        _camera.position += Vector3.right * (speed * TimeManager.DeltaTime);
     }
 
-    private void OnRight(InputAction.CallbackContext a) => _move = true;
-    private void StopRight(InputAction.CallbackContext a) => _move = false;
+    private Coroutine _move;
+    
+    private IEnumerator Move()
+    {
+        var target = _cameraTransform.position;
+        target.x = Target.position.x;
+        var time = 0f;
+        while (MoveSpeed > time)
+        {
+            _cameraTransform.position = Vector3.Lerp(_cameraTransform.position, target, 1f - (MoveSpeed - time) / MoveSpeed);
+            time += TimeManager.DeltaTime;
+            yield return null;
+        }
+			
+        _move = null;
+    }
+    
+    //private void OnRight(InputAction.CallbackContext a) => _move = true;
+    ///private void StopRight(InputAction.CallbackContext a) => _move = false;
     
     private IEnumerator LoseDelayGame()
     {

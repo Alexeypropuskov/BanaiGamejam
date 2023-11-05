@@ -44,6 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcefeb2315a398141b434f957d597c74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _comics: {fileID: 0}
+  Target: {fileID: 0}
   PausePanel: {fileID: 0}
   _winPanel: {fileID: 0}
   _nextGameButton: {fileID: 0}
@@ -53,7 +55,5 @@ MonoBehaviour:
   FallBlocks: {fileID: 0}
   MinBlockFallForWin: 3
   LoseDelay: 5
-  DelayBeforeDefaultMoveSpeed: 5
-  DefaultMoveSpeed: 0.2
-  AdditionalMoveSpeed: 3
+  MoveSpeed: 5
   Soundtrack: {fileID: 8300000, guid: 4c2ac7394b9ab2947883fa059f430611, type: 3}
