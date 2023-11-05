@@ -100,6 +100,8 @@ public class GameInstaller : MonoBehaviour
             _winPanel.SetActive(true);
             AudioManager.PlayEventWin();
             TimeManager.IsGame = false;
+            var r = PlayerPrefs.GetInt(MainMenu.c_progressKey);
+            PlayerPrefs.SetInt(MainMenu.c_progressKey, r + 1);
             
             if(_lastComics != null)
             {

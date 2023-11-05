@@ -57,6 +57,7 @@ using UnityEngine.UI;
 		{
 			AudioManager.PlayEventClick();
 			Root.SetActive(false);
+			if (_lists.Length == 0) return;
 			_lists[_index].SetActive(false);
 			_index = 0;
 		}

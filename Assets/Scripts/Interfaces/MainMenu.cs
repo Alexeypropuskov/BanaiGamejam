@@ -41,7 +41,8 @@ public class MainMenu : MonoBehaviour
 	public void ContinueGame()
 	{
 		AudioManager.PlayEventClick();
-		SceneManager.LoadScene(PlayerPrefs.GetInt(c_progressKey) + c_shift);
+		var r = PlayerPrefs.GetInt(c_progressKey);
+		SceneManager.LoadScene(r + c_shift);
 	}
 
 	public void Exit()
