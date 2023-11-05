@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 	public class ForcePoint : MonoBehaviour
 	{
+		private bool _isEffect;
 		private Camera _camera;
 		
 		public Controls Controls;
@@ -17,6 +18,7 @@ using UnityEngine.UI;
 
 		public Image FillPower;
 		public TextMeshProUGUI FillValueText;
+		public ParticleSystem Effect;
 
 		[Space(20f)]
 		public float Distance = 10f;
@@ -26,8 +28,6 @@ using UnityEngine.UI;
 		public int Force = 5;
 		[HideInInspector]
 		public bool IsOn;
-		[HideInInspector]
-		public bool CanWork;
 
 		public float PowerLimit = 500f;
 		public float PowerCostPerUnitInSec = 5f;
@@ -38,38 +38,62 @@ using UnityEngine.UI;
 		[Space]
 		public float MultDeltaScroll = 100f;
 		
-		private void FixedUpdate()
+		
+		private bool _move;
+		public float _moveSpeed = 3f;
+		private void Update()
 		{
-			if (!TimeManager.IsGame) return;
+			if (CalcLogic())
+			{
+				if (!_isEffect)
+				{
+					_isEffect = true;
+					Effect.Play();
+				}
+			}
+			else if (_isEffect)
+			{
+				_isEffect = false;
+				Effect.Stop();
+			}
+		}
+
+		private bool CalcLogic()
+		{
+			if (!TimeManager.IsGame) return false;
 			
-			if (!Focus.Enabled) return;
+			if (!Focus.Enabled) return false;
 			Movement();
-			
-			CanWork = Physics.Raycast(transform.position, Vector3.right, out var hit, Distance);
-			if (!CanWork) return;
-			
-			if (!IsOn) return;
+
+			if (!IsOn) return false;
 			if (CurrentPower <= 0f)
 			{
 				FindObjectOfType<GameInstaller>().GameOver(this);
-				return;
+				return false;
 			}
-			PowerUse(hit);
+			PowerUse();
+			
+			return true;
 		}
 
 		private void Movement()
 		{
 			var mouse = Mouse.current.position.value;
-			transform.position = _camera.ScreenToWorldPoint(new Vector3(mouse.x, mouse.y, 10f));
+			var point = _camera.ScreenToWorldPoint(new Vector3(mouse.x, mouse.y, 10f));
+			point.z = 0f;
+			transform.position = point;
+			
+			if (_move)
+				_camera.transform.position += Vector3.right * (_moveSpeed * TimeManager.DeltaTime);
 		}
 
-		private void PowerUse(RaycastHit hit)
+		private void PowerUse()
 		{
 			CurrentPower -= Force * PowerCostPerUnitInSec * TimeManager.FixedDeltaTime;
 			FillPower.fillAmount = CurrentPower / PowerLimit;
 			FillValueText.text = Mathf.RoundToInt(CurrentPower).ToString();
-			//todo учитывать дистанцию? как игромеханически это будет?
-			hit.rigidbody.AddForceAtPosition(Vector3.right * Force, hit.point, ForceMode.Force);
+			if (Physics.Raycast(transform.position, Vector3.right, out var hit, Distance))
+				hit.rigidbody.AddForceAtPosition(Vector3.right * Force, hit.point, ForceMode.Force);
 		}
 
 		private void Start()
@@ -80,6 +104,8 @@ using UnityEngine.UI;
 			Controls.Mouse.Hold.performed += HoldOnperformed;
 			Controls.Mouse.Hold.canceled += HoldOncanceled;
 			Controls.Mouse.DeltaPower.performed += DeltaPowerOnperformed;
+			Controls.Mouse.Right.performed += OnRight;
+			Controls.Mouse.Right.canceled += StopRight;
 
 			PowerSlider.minValue = MinForce;
 			MinPowerValueText.text = MinForce.ToString();
@@ -93,6 +119,9 @@ using UnityEngine.UI;
 			FillValueText.text = PowerLimit.ToString();
 		}
 
+		private void OnRight(InputAction.CallbackContext a) => _move = true;
+		private void StopRight(InputAction.CallbackContext a) => _move = false;
+		
 		private void DeltaPowerOnperformed(InputAction.CallbackContext obj)
 			=> PowerSlider.value += obj.ReadValue<Vector2>().y / MultDeltaScroll;
 
@@ -104,19 +133,17 @@ using UnityEngine.UI;
 		
 		private void HoldOncanceled(InputAction.CallbackContext obj)
 		{
-			//Debug.Log("Input: Cancel click");
 			IsOn = false;
 		}
 
 		private void HoldOnperformed(InputAction.CallbackContext obj)
 		{
-			//Debug.Log("Input: Hold click");
-			if (CanWork) IsOn = true;
+			IsOn = true;
 		}
 
 		private void OnDrawGizmos()
 		{
-			var canColor = CanWork ? Color.green : Color.red;
+			var canColor = IsOn ? Color.green : Color.red;
 			var onColor = IsOn ? Color.green : Color.red;
 
 			var pos = transform.position;

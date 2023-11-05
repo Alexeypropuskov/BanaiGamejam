@@ -53,6 +53,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Right"",
+                    ""type"": ""Button"",
+                    ""id"": ""060b4761-c836-4318-8fb7-05ef48426f02"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -88,6 +97,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""67013559-5278-4584-b144-127ae96da43b"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -99,6 +119,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Mouse_Hold = m_Mouse.FindAction("Hold", throwIfNotFound: true);
         m_Mouse_DeltaPower = m_Mouse.FindAction("DeltaPower", throwIfNotFound: true);
         m_Mouse_Pause = m_Mouse.FindAction("Pause", throwIfNotFound: true);
+        m_Mouse_Right = m_Mouse.FindAction("Right", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -163,6 +184,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Mouse_Hold;
     private readonly InputAction m_Mouse_DeltaPower;
     private readonly InputAction m_Mouse_Pause;
+    private readonly InputAction m_Mouse_Right;
     public struct MouseActions
     {
         private @Controls m_Wrapper;
@@ -170,6 +192,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @Hold => m_Wrapper.m_Mouse_Hold;
         public InputAction @DeltaPower => m_Wrapper.m_Mouse_DeltaPower;
         public InputAction @Pause => m_Wrapper.m_Mouse_Pause;
+        public InputAction @Right => m_Wrapper.m_Mouse_Right;
         public InputActionMap Get() { return m_Wrapper.m_Mouse; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -188,6 +211,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
+            @Right.started += instance.OnRight;
+            @Right.performed += instance.OnRight;
+            @Right.canceled += instance.OnRight;
         }
 
         private void UnregisterCallbacks(IMouseActions instance)
@@ -201,6 +227,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
+            @Right.started -= instance.OnRight;
+            @Right.performed -= instance.OnRight;
+            @Right.canceled -= instance.OnRight;
         }
 
         public void RemoveCallbacks(IMouseActions instance)
@@ -223,5 +252,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnHold(InputAction.CallbackContext context);
         void OnDeltaPower(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnRight(InputAction.CallbackContext context);
     }
 }

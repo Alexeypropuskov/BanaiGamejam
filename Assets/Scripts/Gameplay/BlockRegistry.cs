@@ -42,7 +42,13 @@ using UnityEngine;
 				Installer.UpdateScore();
 				Falls++;
 			}
-			
-			
+
+			StartCoroutine(HideDelay(body.gameObject));
+		}
+
+		private IEnumerator HideDelay(GameObject obj)
+		{
+			yield return new WaitForSeconds(10f);
+			obj.SetActive(false);
 		}
 	}

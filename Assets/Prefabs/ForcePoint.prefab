@@ -29,7 +29,8 @@ Transform:
   m_LocalPosition: {x: -4.73, y: 3.331137, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 5601624276914984868}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4682674388520341491
@@ -48,11 +49,108 @@ MonoBehaviour:
   PowerValueText: {fileID: 0}
   MinPowerValueText: {fileID: 0}
   MaxPowerValueText: {fileID: 0}
+  FillPower: {fileID: 0}
+  FillValueText: {fileID: 0}
+  Effect: {fileID: 5723241919915179412}
   Distance: 10
   MinForce: 0
   MaxForce: 10
   Force: 5
   IsOn: 0
-  CanWork: 0
+  PowerLimit: 500
+  PowerCostPerUnitInSec: 5
+  CurrentPower: 0
+  Focus: {fileID: 0}
   MultDeltaScroll: 100
-  MoveSpeed: 3
+--- !u!1001 &5597057471976552246
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5207613785270582760}
+    m_Modifications:
+    - target: {fileID: 1634767862067424, guid: 5f225a0dc032238448ccb703fb6817d7, type: 3}
+      propertyPath: m_Name
+      value: FlameThrower
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584431484625042, guid: 5f225a0dc032238448ccb703fb6817d7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584431484625042, guid: 5f225a0dc032238448ccb703fb6817d7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584431484625042, guid: 5f225a0dc032238448ccb703fb6817d7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584431484625042, guid: 5f225a0dc032238448ccb703fb6817d7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584431484625042, guid: 5f225a0dc032238448ccb703fb6817d7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584431484625042, guid: 5f225a0dc032238448ccb703fb6817d7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584431484625042, guid: 5f225a0dc032238448ccb703fb6817d7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584431484625042, guid: 5f225a0dc032238448ccb703fb6817d7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584431484625042, guid: 5f225a0dc032238448ccb703fb6817d7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584431484625042, guid: 5f225a0dc032238448ccb703fb6817d7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198214374999220926, guid: 5f225a0dc032238448ccb703fb6817d7, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198214374999220926, guid: 5f225a0dc032238448ccb703fb6817d7, type: 3}
+      propertyPath: startDelay.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198214374999220926, guid: 5f225a0dc032238448ccb703fb6817d7, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 198214374999220926, guid: 5f225a0dc032238448ccb703fb6817d7, type: 3}
+      propertyPath: InitialModule.startSpeed.minScalar
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 198637950067575458, guid: 5f225a0dc032238448ccb703fb6817d7, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198637950067575458, guid: 5f225a0dc032238448ccb703fb6817d7, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 20
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects:
+    - {fileID: 1685911702664702, guid: 5f225a0dc032238448ccb703fb6817d7, type: 3}
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5f225a0dc032238448ccb703fb6817d7, type: 3}
+--- !u!4 &5601624276914984868 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4584431484625042, guid: 5f225a0dc032238448ccb703fb6817d7, type: 3}
+  m_PrefabInstance: {fileID: 5597057471976552246}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &5723241919915179412 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 198637950067575458, guid: 5f225a0dc032238448ccb703fb6817d7, type: 3}
+  m_PrefabInstance: {fileID: 5597057471976552246}
+  m_PrefabAsset: {fileID: 0}

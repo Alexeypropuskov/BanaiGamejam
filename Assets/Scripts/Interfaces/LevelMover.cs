@@ -9,6 +9,8 @@ namespace Interfaces
 	{
 		private Coroutine _effectCoroutine;
 		private Coroutine _moveCoroutine;
+		private float _time;
+		private Vector3 _position;
 		
 		[HideInInspector]
 		public Vector3[] Foundations;
@@ -45,7 +47,7 @@ namespace Interfaces
 			NextTowerTransform = NextTowerButton.transform;
 			NextTowerButton.onClick.AddListener(StartMove);
 
-			_moveCoroutine = StartCoroutine(MoveTo());
+			//_moveCoroutine = StartCoroutine(MoveTo());
 			_effectCoroutine = StartCoroutine(Animation());
 		}
 
@@ -65,6 +67,7 @@ namespace Interfaces
 				NextTowerTransform.localScale = Vector3.one * Scale.x;
 				Border.color = Color.Evaluate(0f);
 			}
+			
 			_moveCoroutine = StartCoroutine(MoveTo());
 			_effectCoroutine = StartCoroutine(Animation());
 		}
@@ -82,7 +85,6 @@ namespace Interfaces
 			var time = 0f;
 			while (TimeToMove > time)
 			{
-				Debug.Log($"{1f - (TimeToMove - time) / TimeToMove} && {time}");
 				Camera.position = Vector3.Lerp(Camera.position, target, 1f - (TimeToMove - time) / TimeToMove);
 				time += TimeManager.DeltaTime;
 				yield return null;
